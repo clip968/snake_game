@@ -8,6 +8,7 @@ void Snake::init(){
     snakeHeadPosition = {10, 7}; // {y, x}
     snakeTailPosition = {10, 5};
     currentDirection = 4;
+    gateUsingChk = false;
 }
 
 bool Snake::setDirection(int direction){
@@ -51,6 +52,7 @@ int Snake::move() {
     int object = getHeadObject();
     // gate
     if(object == 5){
+        if(gateUsingChk) return -1;
         int y, x;
         int iy = snakeHeadPosition.first + delta[currentDirection].first, ix = snakeHeadPosition.second + delta[currentDirection].second;
         bool chk_found = false;
@@ -74,6 +76,7 @@ int Snake::move() {
         snakeHeadPosition = {y, x};
 
         reduce();
+        gateUsingChk = true; // tail이 게이트를 완전히 통과할때까지 헤드는 게이트 이용불가
     }
     // growth item
     else if(object == 6){
@@ -136,5 +139,6 @@ void Snake::reduce() {
         x += delta[tmpDirection].second;
         snakeTailPosition = {y, x};
         tailGateChk = true; // 게이트 생성 신호
+        gateUsingChk = false; // 스네이크 게이트 사용 가능
     }
 }

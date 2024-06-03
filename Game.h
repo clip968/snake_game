@@ -11,7 +11,7 @@
 
 extern char gameMap[25][25];
 extern std::pair<int, int> snakeHeadPosition;
-extern int scoreCurrentLen, scoreMaxLen, scoreGrowthItems, scorePoisonItems, scoreGate;
+extern int scoreCurrentLen, scoreMaxLen, scoreGrowthItems, scorePoisonItems, scoreGate, scoreTime;
 extern int missionMaxLen, missionGrowthItems, missionPoisonItems, missionGate;
 extern bool tailGateChk;
 class Game {
@@ -38,6 +38,8 @@ private:
     int tick;
     int stage;
     void itemsTimeChk();
+    void timeUpdate();
+    std::time_t startTime;
 };
 
 #endif

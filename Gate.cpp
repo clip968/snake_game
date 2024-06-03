@@ -22,10 +22,20 @@ void Gate::createGate() {
     } while (gameMap[y1][x1] != -1);
 
     // 두 번째 게이트 위치 선택
-    do {
+    int dy[]{-1, -1, -1, 0, 0, 1, 1, 1}, dx[]{-1, 0, 1, -1, 1, -1, 0, 1};
+    bool chkPosition{true};
+    while(true){
         x2 = getRandomGate(0, 24);
         y2 = getRandomGate(0, 24);
-    } while ((x1 == x2 && y1 == y2) || gameMap[y2][x2] != -1);
+        if((x1 == x2 && y1 == y2) || gameMap[y2][x2] != -1) continue;
+        for(int i=0; i<8; ++i){
+            if(x2+dx[i]==x1 && y2+dy[i]==y1) {
+                chkPosition = false;
+            }
+        }
+        if(chkPosition) break;
+        else chkPosition = true;
+    }
 
     // 게이트 위치 설정
     gameMap[y1][x1] = gateTarget;

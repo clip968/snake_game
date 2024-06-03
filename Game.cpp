@@ -1,5 +1,7 @@
 #include "Game.h"
 #include <unistd.h>
+#include <ctime>
+
 // 전역 변수 정의
 char gameMap[25][25] = {};
 std::pair<int, int> snakeHeadPosition;
@@ -8,6 +10,7 @@ int scoreMaxLen;
 int scoreGrowthItems;
 int scorePoisonItems;
 int scoreGate;
+int scoreTime;
 int missionMaxLen;
 int missionGrowthItems;
 int missionPoisonItems;
@@ -23,6 +26,7 @@ void Game::init(int mapIndex) {
     stage = mapIndex;
     chkGameOver = false;
     tick = 400;
+    startTime = std::time(nullptr); // 현재 시간 저장
     initMap(mapIndex);
     initScore();
     initMission();
@@ -73,10 +77,16 @@ void Game::initScore(){
 }
 
 void Game::initMission(){
-    missionMaxLen = 10; // 최대길이
-    missionGrowthItems = 5; // 획득 growth 아이템
-    missionPoisonItems = 2; // 획득 poison 아이템
-    missionGate = 1; // 사용한 게이트
+    missionMaxLen = 10 + stage; // 최대길이
+    missionGrowthItems = 5 + stage; // 획득 growth 아이템
+    missionPoisonItems = 2 + stage; // 획득 poison 아이템
+    missionGate = 1 + stage; // 사용한 게이트
+}
+
+void Game::timeUpdate() {
+    std::time_t currentTime = std::time(nullptr);
+    double difference = std::difftime(currentTime, startTime);
+    scoreTime = (int)difference;
 }
 
 // 게임 실행
@@ -92,6 +102,7 @@ bool Game::run() {
         }
         if(cnt==0){
             gameStatChk = update();  // 각종 상태 업데이트
+            timeUpdate(); // 시간정보 업데이트
             if(!gameStatChk) {
                 display.drawGameOver();   
                 return false; // 게임오버로 게임 종료

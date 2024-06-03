@@ -96,39 +96,40 @@ void Display::drawScoreBoard() {
     sprintf(tmpText, "+ : %d", scoreGrowthItems); mvaddstr(4, 116, tmpText);
     sprintf(tmpText, "- : %d", scorePoisonItems); mvaddstr(5, 116, tmpText);
     sprintf(tmpText, "G : %d", scoreGate); mvaddstr(6, 116, tmpText);
-    mvaddstr(8, 110, "=====================");
+    sprintf(tmpText, "T : %ds", scoreTime); mvaddstr(7, 116, tmpText);
+    mvaddstr(9, 110, "=====================");
     attroff(COLOR_PAIR(5));
 }
 
 void Display::drawMissionBoard(){
     char tmpText[50];
     attron(COLOR_PAIR(5));
-    mvaddstr(12, 110, "====== Mission ======");
-    sprintf(tmpText, "B : %d %c", missionMaxLen, (scoreMaxLen>=missionMaxLen?'v':' ')); mvaddstr(14, 116, tmpText);
-    sprintf(tmpText, "+ : %d %c", missionGrowthItems, (scoreGrowthItems>=missionGrowthItems?'v':' ')); mvaddstr(15, 116, tmpText);
-    sprintf(tmpText, "- : %d %c", missionPoisonItems, (scorePoisonItems>=missionPoisonItems?'v':' ')); mvaddstr(16, 116, tmpText);
-    sprintf(tmpText, "G : %d %c", missionGate, (scoreGate>=missionGate?'v':' ')); mvaddstr(17, 116, tmpText);
-    mvaddstr(19, 110, "=====================");
+    mvaddstr(13, 110, "====== Mission ======");
+    sprintf(tmpText, "B : %d %c", missionMaxLen, (scoreMaxLen>=missionMaxLen?'v':' ')); mvaddstr(15, 116, tmpText);
+    sprintf(tmpText, "+ : %d %c", missionGrowthItems, (scoreGrowthItems>=missionGrowthItems?'v':' ')); mvaddstr(16, 116, tmpText);
+    sprintf(tmpText, "- : %d %c", missionPoisonItems, (scorePoisonItems>=missionPoisonItems?'v':' ')); mvaddstr(17, 116, tmpText);
+    sprintf(tmpText, "G : %d %c", missionGate, (scoreGate>=missionGate?'v':' ')); mvaddstr(18, 116, tmpText);
+    mvaddstr(20, 110, "=====================");
     attroff(COLOR_PAIR(5));
 }
 
 void Display::drawGameOver(){
     attron(COLOR_PAIR(12));
-    mvaddstr(23, 110, "Game Over!  press(q) to quit game");
+    mvaddstr(24, 110, "Game Over!  press(q) to quit game");
     attroff(COLOR_PAIR(12));
     refresh();
 }
 
 void Display::drawStageClear(){
     attron(COLOR_PAIR(11));
-    mvaddstr(23, 110, "Stage Clear!  press(q) to next stage");
+    mvaddstr(24, 110, "Stage Clear!  press(q) to next stage");
     attroff(COLOR_PAIR(11));
     refresh();
 }
 
 void Display::drawGameClear(){
     attron(COLOR_PAIR(11));
-    mvaddstr(23, 110, "Congratulation! Game Clear!  press(q) to quit game");
+    mvaddstr(24, 110, "Congratulation! Game Clear!  press(q) to quit game");
     attroff(COLOR_PAIR(11));
     refresh();
 }

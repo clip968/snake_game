@@ -19,6 +19,7 @@ private:
     void reduce();
     int getHeadObject();
     int newDirectionCalc(int y, int x, int dir);
+    bool gateUsingChk;
 };
 
 #endif
