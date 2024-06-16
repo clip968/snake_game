@@ -65,6 +65,7 @@ void Game::initMap(int mapIndex){
     }
     else if(mapIndex == 3){ // 스테이지 4는 +자 벽
         for (int i = 4; i < 21; ++i) {
+            if(i>=11 && i<=13) continue;
             gameMap[12][i] = gameMap[i][12] = -1;
         }
     }
